@@ -7,3 +7,5 @@ export * from "./Shield";
 export * from "./Star";
 export * from "./TrendingUp";
 export * from "./UsersGroup";
+export * from "./Email";
+export * from "./LockPassword";
