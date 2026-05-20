@@ -1,4 +1,4 @@
-import { User } from "../common/icons/User";
+import { User } from "@/src/components/ui/icons";
 
 interface Props {
   className?: string;

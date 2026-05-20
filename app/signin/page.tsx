@@ -1,7 +1,6 @@
-import { HomeLink } from "@/src/components/common/HomeLink";
-import { SignInForm } from "@/src/components/auth/SignInForm";
-import { Book, UsersGroup } from "@/src/components/common/icons";
-import { SignInCardInfo } from "@/src/components/auth/SignInCardInfo";
+import { HomeLink } from "@/src/components/ui";
+import { Book, UsersGroup } from "@/src/components/ui/icons";
+import { SignInForm, SignInCardInfo } from "@/src/features/auth/components";
 
 export default function SignInPage() {
   return (

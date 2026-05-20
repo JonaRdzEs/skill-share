@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { RightArrow, Star } from "../../common/icons";
-import { Link } from "../../common/Link";
+import { Link } from "@/src/components/ui";
+import { RightArrow, Star } from "@/src/components/ui/icons";
 
 export function HeroSection() {
   return (
@@ -37,12 +37,12 @@ export function HeroSection() {
         </div>
       </div>
       <div className="hidden max-w-190 md:relative md:block w-full mx-auto">
-        <div className="absolute inset-0 bg-linear-to-br from-blue-300 to-blue-500 rounded-2xl transform rotate-3  max-w-70 lg:max-w-120 xl:max-w-150" />
+        <div className="absolute inset-0 bg-linear-to-br from-blue-300 to-blue-500 rounded-2xl transform rotate-3 ml-auto mr-0 max-w-70 lg:max-w-120 xl:max-w-150" />
         <Image
           src="/hero-section.jpg"
           width={350}
           height={360}
-          className="relative w-full max-w-70 h-90 rounded-lg object-cover lg:max-w-120 xl:max-w-150"
+          className="relative w-full max-w-70 h-90 rounded-lg ml-auto mr-0 object-cover lg:max-w-120 xl:max-w-150"
           alt="People learning together"
         />
       </div>

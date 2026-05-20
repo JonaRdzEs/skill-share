@@ -1,17 +1,21 @@
 "use client";
 
 import { ChangeEvent, MouseEvent, useState } from "react";
-import { Input } from "../common/Input";
-import { LockPassword, Email, RightArrow } from "../common/icons";
+import { Input } from "@/src/components/ui";
+import { LockPassword, Email, RightArrow } from "@/src/components/ui/icons";
+import { login } from "../services/login";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [disabledBtn, setDisabledBtn] = useState<boolean>(false);
 
-  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const onClick = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    console.log({ email, password });
+    setDisabledBtn(true);
+    const isOk = await login({ email, password });
+    console.log("Logged in successfully?", isOk);
+    setDisabledBtn(false);
   };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +46,7 @@ export function SignInForm() {
         icon={<LockPassword width={28} height={28} className="text-gray-400" />}
         className="w-full max-w-md mt-3"
       />
-      <button onClick={onClick} className="bg-primary text-white font-semibold flex justify-center items-center gap-2 py-3 px-6 rounded-lg w-full max-w-md my-7 hover:cursor-pointer hover:bg-blue-600">
+      <button onClick={onClick} disabled={disabledBtn} className="bg-primary text-white font-semibold flex justify-center items-center gap-2 py-3 px-6 rounded-lg w-full max-w-md my-7 hover:cursor-pointer hover:bg-blue-600">
         Sign In
         <RightArrow className="text-white" /> 
       </button>

@@ -1,5 +1,4 @@
-import { Section } from "../Section";
-import { CategoryChip } from "../CategoryChip";
+import { Section, CategoryChip } from "../components";
 
 export function PopularCategories() {
   const categories = [

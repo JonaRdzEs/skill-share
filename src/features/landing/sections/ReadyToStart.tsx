@@ -1,5 +1,5 @@
-import { Link } from "../../common/Link";
-import { RightArrow } from "../../common/icons";
+import { Link } from "@/src/components/ui";
+import { RightArrow } from "@/src/components/ui/icons";
 
 export function ReadyToStart() {
   return (

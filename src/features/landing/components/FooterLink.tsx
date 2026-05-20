@@ -1,4 +1,4 @@
-import { Link } from "../common/Link";
+import { Link } from "@/src/components/ui";
 
 interface Props {
   path: string;

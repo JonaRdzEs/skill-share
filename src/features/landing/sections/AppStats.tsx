@@ -1,4 +1,4 @@
-import { StatInfo } from "../StatInfo";
+import { StatInfo } from "../components/index";
 
 export function AppStats() {
   return (

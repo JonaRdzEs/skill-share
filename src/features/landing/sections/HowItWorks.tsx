@@ -1,6 +1,5 @@
-import { Section } from "../Section";
-import { StepCard } from "../StepCard";
-import { Book, UsersGroup, TrendingUp } from "../../common/icons";
+import { Section, StepCard } from "../components";
+import { Book, UsersGroup, TrendingUp } from "@/src/components/ui/icons";
 
 export function HowItWorks() {
   const steps = [

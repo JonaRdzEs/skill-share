@@ -1,6 +1,5 @@
-import { Section } from "../Section";
+import { Section, TestimonialCard } from "../components";
 import testimonialsData from "@/src/data/testimonials.json";
-import { TestimonialCard } from "../TestimonialCard";
 
 export function Testimonials() {
   const { testimonials } = testimonialsData;

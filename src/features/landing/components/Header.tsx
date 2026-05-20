@@ -1,5 +1,4 @@
-import { HomeLink } from "../common/HomeLink";
-import { Link } from "../common/Link";
+import { HomeLink, Link } from "@/src/components/ui";
 
 export function Header() {
   return (

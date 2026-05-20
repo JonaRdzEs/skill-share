@@ -1,4 +1,4 @@
-import { Card } from "../common/Card";
+import { Card } from "@/src/components/ui";
 
 interface Props {
   className?: string;

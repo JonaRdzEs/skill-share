@@ -1,5 +1,5 @@
-import { Book } from "../../common/icons";
-import { FooterLink } from "../FooterLink";
+import { Book } from "@/src/components/ui/icons";
+import { FooterLink } from "../components/index";
 
 export function Footer() {
   return (
