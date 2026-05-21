@@ -6,15 +6,15 @@ export function Header() {
       <nav className="container m-auto flex justify-between items-center">
         <HomeLink />
         <div className="justify-start items-center gap-9  hidden lg:flex">
-          <Link href="#how-it-works">How It Works</Link>
-          <Link href="#why-choose-us">Why Choose Us</Link>
-          <Link href="#testimonials">Testimonials</Link>
-          <Link href="/signin" className="text-primary hover:text-primary-dark">
+          <Link href="#how-it-works" variant="secondary">How It Works</Link>
+          <Link href="#why-choose-us" variant="secondary">Why Choose Us</Link>
+          <Link href="#testimonials" variant="secondary">Testimonials</Link>
+          <Link href="/signin" variant="primary">
             Sign In
           </Link>
           <Link
             href="/signup"
-            className="bg-primary text-white text-center rounded-md p-2 w-32 transition-colors hover:bg-primary-dark"
+            className="bg-primary text-white text-center rounded-md p-2 w-32 transition-colors hover:bg-blue-600"
           >
             Get Started
           </Link>

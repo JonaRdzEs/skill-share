@@ -12,11 +12,11 @@ export function ReadyToStart() {
         through skill sharing
       </p>
       <div className="flex justify-center items-center flex-wrap gap-4 mt-8">
-        <Link href="/singup" className="text-primary bg-white w-full max-w-60 rounded-lg flex justify-center items-center gap-2 py-4 px-5 hover:scale-105 transition-all">
+        <Link href="/signup" className="text-primary bg-white w-full max-w-60 rounded-lg flex justify-center items-center gap-2 py-4 px-5 hover:scale-105 transition-all">
           Get Started Free
           <RightArrow />
         </Link>
-        <Link href="/singin" className="border-2 rounded-lg border-white py-4 px-5 text-white w-full max-w-60 text-center hover:bg-white/10">Explore Courses</Link>
+        <Link href="/signin" className="border-2 rounded-lg border-white py-4 px-5 text-white w-full max-w-60 text-center hover:bg-white/10">Explore Courses</Link>
       </div>
     </section>
   );

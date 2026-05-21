@@ -19,12 +19,12 @@ export function Footer() {
       <div className="flex flex-wrap justify-start items-center gap-10 sm:justify-around">
         <div className="my-6">
           <h6 className="font-semibold text-white text-lg mb-3">Learn</h6>
-          <FooterLink path="/sigin" text="Browse courses" />
+          <FooterLink path="/signin" text="Browse courses" />
           <FooterLink path="#popular-categories" text="Categories" />
         </div>
         <div>
           <h6 className="font-semibold text-white text-lg mb-3">Teach</h6>
-          <FooterLink path="/sigin" text="Become Instructor" />
+          <FooterLink path="/signin" text="Become Instructor" />
           <FooterLink path="#testimonials" text="Success Stories" />
         </div>
       </div>
