@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentPropsWithoutRef } from "react";
 
 interface Props extends ComponentPropsWithoutRef<"input"> {

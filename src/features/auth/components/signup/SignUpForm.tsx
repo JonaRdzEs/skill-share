@@ -8,13 +8,14 @@ import {
   RightArrow,
   Email,
 } from "@/src/components/ui/icons";
-import { Input } from "@/src/components/ui";
+import { Button, Input } from "@/src/components/ui";
 import { signup } from "../../services/signup";
 import { validateForm } from "@/src/helpers/signupForm";
 import { login } from "../../services/login";
 
 export function SignUpForm() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -43,7 +44,7 @@ export function SignUpForm() {
       setErrors({ ...errs });
       return;
     }
-
+    setLoading(true);
     signup({
       data,
       onSuccess: () => {
@@ -131,13 +132,15 @@ export function SignUpForm() {
         icon={<LockPassword width={28} height={28} className="text-gray-400" />}
         className="mt-5"
       />
-      <button
+      <Button
+        variant="primary"
         type="submit"
-        className="bg-primary text-white font-semibold flex justify-center items-center gap-2 py-3 px-6 rounded-lg w-full max-w-md my-7 hover:cursor-pointer hover:bg-blue-600"
+        loading={loading}
+        disabled={loading}
       >
         Create Account
         <RightArrow className="text-white" />
-      </button>
+      </Button>
     </form>
   );
 }

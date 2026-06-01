@@ -8,7 +8,7 @@ import { login } from "../../services/login";
 
 export function SignInForm() {
   const router = useRouter();
-  const [disabledBtn, setDisabledBtn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,9 +16,11 @@ export function SignInForm() {
     const email = data.get("email") as string;
     const password = data.get("pass") as string;
 
-    setDisabledBtn(true);
+    if(!email || !password) return;
+
+    setLoading(true);
     login({ data: { email, password }, onSuccess: () => router.push("/home")});
-    setDisabledBtn(false);
+    setLoading(false);
   };
 
   return (
@@ -40,7 +42,7 @@ export function SignInForm() {
         icon={<LockPassword width={28} height={28} className="text-gray-400" />}
         className="mt-3"
       />
-      <Button variant="primary" disabled={disabledBtn} type="submit">
+      <Button variant="primary" loading={loading} disabled={loading} type="submit">
         Sign In
         <RightArrow className="text-white" />
       </Button>
