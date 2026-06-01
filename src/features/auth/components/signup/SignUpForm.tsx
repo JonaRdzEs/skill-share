@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
 import {
   User,
@@ -10,8 +11,10 @@ import {
 import { Input } from "@/src/components/ui";
 import { signup } from "../../services/signup";
 import { validateForm } from "@/src/helpers/signupForm";
+import { login } from "../../services/login";
 
 export function SignUpForm() {
+  const router = useRouter();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -41,7 +44,15 @@ export function SignUpForm() {
       return;
     }
 
-    await signup(data);
+    signup({
+      data,
+      onSuccess: () => {
+        login({
+          data: { email, password },
+          onSuccess: () => router.push("/home"),
+        });
+      },
+    });
   };
 
   return (

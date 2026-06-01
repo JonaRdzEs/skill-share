@@ -3,3 +3,9 @@ export interface BasicInfoUser {
   name: string;
   email: string;
 }
+
+export interface UserInfo extends BasicInfoUser {
+  bio: string | null;
+  location: string | null;
+  photoUrl: string | null;
+}

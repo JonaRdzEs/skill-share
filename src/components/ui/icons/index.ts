@@ -1,6 +1,7 @@
 export * from "./Award";
 export * from "./Book";
 export * from "./Certificate";
+export * from "./Checkbox";
 export * from "./Clock";
 export * from "./Email";
 export * from "./LockPassword";

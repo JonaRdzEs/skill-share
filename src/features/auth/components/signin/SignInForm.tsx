@@ -1,23 +1,23 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
 import { Button, Input } from "@/src/components/ui";
 import { LockPassword, Email, RightArrow } from "@/src/components/ui/icons";
 import { login } from "../../services/login";
 
 export function SignInForm() {
-  
+  const router = useRouter();
   const [disabledBtn, setDisabledBtn] = useState<boolean>(false);
 
-  const onSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const email = data.get("email") as string;
     const password = data.get("pass") as string;
 
     setDisabledBtn(true);
-    const isOk = await login({ email, password });
-    console.log("Logged in successfully?", isOk);
+    login({ data: { email, password }, onSuccess: () => router.push("/home")});
     setDisabledBtn(false);
   };
 

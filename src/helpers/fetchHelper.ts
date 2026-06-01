@@ -9,11 +9,13 @@ export async function httpFetch<T>({
   path,
   method,
   body,
+  authenticated = false,
   options = {},
 }: HttpFetchOptions): Promise<SuccessResponse<T> | ErrorResponse> {
   try {
     const resp = await fetch(`http://localhost:3001${path}`, {
       method,
+      credentials: authenticated ? "include" : "omit",
       headers: {
         "Content-Type": "application/json",
       },

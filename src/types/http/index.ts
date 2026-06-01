@@ -3,7 +3,7 @@ export interface HttpFetchOptions {
   authenticated?: boolean;
   method: "get" | "post" | "put" | "delete";
   body?: BodyInit | object;
-  options?: Omit<RequestInit, "method" | "body" | "headers">;
+  options?: Omit<RequestInit, "method" | "body" | "headers" | "credentials">;
 }
 
 export interface ServerErrorResponse {

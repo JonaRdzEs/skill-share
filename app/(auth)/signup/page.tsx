@@ -1,4 +1,5 @@
 import { HomeLink, Link } from "@/src/components/ui";
+import { Checkbox } from "@/src/components/ui/icons";
 import { SignUpForm } from "@/src/features/auth/components";
 
 export default function SignUpPage() {
@@ -35,16 +36,17 @@ export default function SignUpPage() {
           </div>
         </div>
       </section>
-      <section className="hidden lg:flex bg-linear-to-tr from-blue-500 to-blue-600 flex-col gap-5 justify-center items-start px-16 xl:px-36">
+      <section className="hidden lg:flex bg-linear-to-tr from-blue-500 to-blue-600 flex-col justify-center items-start px-16 xl:px-34">
         <h2 className="text-white font-bold text-4xl">
           Start Your Learning Journey Today
         </h2>
-        <p className="text-white text-lg">
+        <p className="text-white text-lg mt-8"> 
           Join our community and unlock endless possibilities to learn and teach
         </p>
-        <ul className="flex flex-col gap-5 mt-8">
+        <ul className="flex flex-col gap-5 mt-15">
           {reasons.map((item, idx) => (
-            <li key={`${item} ${idx}`} className="text-white">
+            <li key={`${item} ${idx}`} className="text-white flex justify-start items-center gap-2">
+              <Checkbox />
               {item}
             </li>
           ))}
