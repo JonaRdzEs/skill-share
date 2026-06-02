@@ -1,21 +1,21 @@
 "use client";
 
+import { ResponseCallbacks } from "@/src/helpers/http";
 import { ServerErrorResponse } from "@/src/types/http";
 import { UserInfo } from "@/src/types/users";
 
-interface LoginOptions {
+interface LoginOptions extends ResponseCallbacks<UserInfo> {
   data: {
     email: string;
     password: string;
   };
-  onSuccess?: (data: UserInfo) => void;
-  onError?: (error: string) => void;
 }
 
 export async function login({
   data,
   onSuccess = () => {},
   onError = () => {},
+  onSettled = () => {},
 }: LoginOptions) {
   try {
     const response = await fetch("http://localhost:3001/auth/login", {
@@ -37,5 +37,7 @@ export async function login({
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Something went wrong";
     onError(msg);
+  } finally {
+    onSettled();
   }
 }

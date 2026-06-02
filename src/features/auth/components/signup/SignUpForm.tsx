@@ -53,6 +53,7 @@ export function SignUpForm() {
           onSuccess: () => router.push("/home"),
         });
       },
+      onSettled: () => setLoading(false),
     });
   };
 
