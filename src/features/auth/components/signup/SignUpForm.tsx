@@ -1,14 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SubmitEvent, useState } from "react";
-import {
-  User,
-  LockPassword,
-  RightArrow,
-  Email,
-} from "@/src/components/ui/icons";
-import { Button, Input } from "@/src/components/ui";
+import { ChangeEvent, SubmitEvent, useState } from "react";
+import { User, RightArrow } from "@/src/components/ui/icons";
+import { Button, Input, TextError } from "@/src/components/ui";
+import { EmailInput } from "../EmailInput";
+import { PasswordInput } from "../PasswordInput";
 import { signup } from "../../services/signup";
 import { validateForm } from "@/src/helpers/signupForm";
 import { login } from "../../services/login";
@@ -16,12 +13,26 @@ import { login } from "../../services/login";
 export function SignUpForm() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const [errors, setErrors] = useState({
+  const [requestError, setRequestError] = useState<string>("");
+  const [errors, setErrors] = useState<{ [k: string]: string }>({
     name: "",
     email: "",
     password: "",
     passConfirm: "",
   });
+
+  const onLogin = (email: string, password: string): void => {
+    login({
+      data: { email, password },
+      onSuccess: () => router.push("/home"),
+    });
+  };
+
+  const handleCleanError = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputId = e.target.id;
+
+    if (errors[inputId]) setErrors({ ...errors, [inputId]: "" });
+  };
 
   const onSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,12 +58,8 @@ export function SignUpForm() {
     setLoading(true);
     signup({
       data,
-      onSuccess: () => {
-        login({
-          data: { email, password },
-          onSuccess: () => router.push("/home"),
-        });
-      },
+      onSuccess: () => onLogin(email, password),
+      onError: (err) => setRequestError(err),
       onSettled: () => setLoading(false),
     });
   };
@@ -65,13 +72,9 @@ export function SignUpForm() {
         type="text"
         name="username"
         placeholder="John Doe"
-        onChange={() => {
-          if (errors.name) {
-            setErrors({ ...errors, name: "" });
-          }
-        }}
+        onChange={handleCleanError}
         error={errors.name}
-        icon={
+        leftIcon={
           <User
             variant="outlined"
             width={28}
@@ -81,56 +84,34 @@ export function SignUpForm() {
         }
         className="mt-5"
       />
-      <Input
-        label="Email"
+      <EmailInput
         id="email"
         name="email"
-        type="email"
-        placeholder="user@example.com"
-        onChange={() => {
-          if (errors.email) {
-            setErrors({ ...errors, email: "" });
-          }
-        }}
+        onChange={handleCleanError}
         error={errors.email}
-        icon={<Email width={28} height={28} className="text-gray-400" />}
         className="mt-5"
       />
+      {requestError && (
+        <TextError className="text-left" size="xs" error={requestError} />
+      )}
       <div className="mt-5">
-        <Input
-          label="Password"
+        <PasswordInput
           id="password"
           name="pass"
-          type="password"
-          placeholder="********"
           error={errors.password}
-          onChange={() => {
-            if (errors.password) {
-              setErrors({ ...errors, password: "" });
-            }
-          }}
-          icon={
-            <LockPassword width={28} height={28} className="text-gray-400" />
-          }
+          onChange={handleCleanError}
         />
         <p className="text-gray-400 text-[10px] font-semibold">
           Password should have at least 8 characters, contain at least 1
           lowercase letter, 1 uppercase letter, 1 number and 1 special character
         </p>
       </div>
-      <Input
+      <PasswordInput
         label="Confirm Password"
-        id="password-confirm"
+        id="passConfirm"
         name="pass-confirm"
-        type="password"
-        placeholder="*******"
-        onChange={() => {
-          if (errors.passConfirm) {
-            setErrors({ ...errors, passConfirm: "" });
-          }
-        }}
+        onChange={handleCleanError}
         error={errors.passConfirm}
-        icon={<LockPassword width={28} height={28} className="text-gray-400" />}
         className="mt-5"
       />
       <Button

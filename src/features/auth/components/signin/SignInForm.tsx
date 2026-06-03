@@ -2,13 +2,18 @@
 
 import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
-import { Button, Input } from "@/src/components/ui";
-import { LockPassword, Email, RightArrow } from "@/src/components/ui/icons";
+import { Button, TextError } from "@/src/components/ui";
+import { RightArrow } from "@/src/components/ui/icons";
+import { EmailInput } from "../EmailInput";
+import { PasswordInput } from "../PasswordInput";
 import { login } from "../../services/login";
 
 export function SignInForm() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const cleanError = () => setError("");
 
   const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,33 +21,36 @@ export function SignInForm() {
     const email = data.get("email") as string;
     const password = data.get("pass") as string;
 
-    if(!email || !password) return;
+    if (!email || !password) return;
 
     setLoading(true);
-    login({ data: { email, password }, onSuccess: () => router.push("/home")});
-    setLoading(false);
+    login({
+      data: { email, password },
+      onSuccess: () => router.push("/home"),
+      onError: (err) => setError(err),
+      onSettled: () => setLoading(false),
+    });
   };
 
   return (
     <form className="w-full max-w-md mt-8" onSubmit={onSubmit}>
-      <Input
-        label="Email"
-        id="email"
-        type="email"
+      <EmailInput
         name="email"
-        placeholder="email@example.com"
-        icon={<Email width={28} height={28} className="text-gray-400" />}
+        onChange={cleanError}
       />
-      <Input
-        label="Password"
-        type="password"
+      <PasswordInput
         id="password"
         name="pass"
-        placeholder="*********"
-        icon={<LockPassword width={28} height={28} className="text-gray-400" />}
         className="mt-3"
+        onChange={cleanError}
       />
-      <Button variant="primary" loading={loading} disabled={loading} type="submit">
+      {error && <TextError error={error} />}
+      <Button
+        variant="primary"
+        loading={loading}
+        disabled={loading}
+        type="submit"
+      >
         Sign In
         <RightArrow className="text-white" />
       </Button>
