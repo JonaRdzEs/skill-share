@@ -4,10 +4,15 @@ export interface BasicInfoUser {
   email: string;
 }
 
-export interface UserInfo extends BasicInfoUser {
-  bio: string | null;
-  location: string | null;
-  photoUrl: string | null;
-  createdAt?: Date;
-  updatedAt?: Date;
+export interface UserInfo {
+  user: {
+    id: BasicInfoUser["id"];
+    name: BasicInfoUser["name"];
+    email: BasicInfoUser["email"];
+    bio: string | null;
+    location: string | null;
+    photoUrl: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
+  };
 }

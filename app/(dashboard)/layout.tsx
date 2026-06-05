@@ -1,4 +1,4 @@
-import { Provider } from "@/src/providers/Provider";
+import { TopBar } from "@/src/components/ui";
 
 interface Props {
   children: React.ReactNode;
@@ -6,11 +6,10 @@ interface Props {
 
 export default async function HomeLayout({ children }: Readonly<Props>) {
   return (
-    <Provider>
       <>
+        <TopBar />
         <h1>Home Layout</h1>
         {children}
       </>
-    </Provider>
   );
 }

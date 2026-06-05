@@ -17,7 +17,7 @@ export function TestimonialCard({ className = "", content, user }: Props) {
       <div className="flex justify-start items-center gap-4 mt-5">
         {!user.image && (
           <div className="w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center">
-            <User />
+            <User variant="filled" />
           </div>
         )}
         <div className="flex flex-col">
