@@ -4,24 +4,24 @@ import type {
   ServerErrorResponse,
   SuccessResponse,
 } from "@/src/types/http";
+import { API_BASE_URL } from "../constants";
 
 export async function httpFetch<T>({
   path,
   method,
   body,
-  authenticated = false,
+  token,
   options = {},
 }: HttpFetchOptions): Promise<SuccessResponse<T> | ErrorResponse> {
   try {
-    const resp = await fetch(`http://localhost:3001${path}`, {
+    const resp = await fetch(`${API_BASE_URL}${path}`, {
       method,
-      credentials: authenticated ? "include" : "omit",
       headers: {
-        "Content-Type": "application/json",
+        ...(body &&
+          typeof body === "object" && { "Content-Type": "application/json" }),
+        ...(token && { Cookie: `access_token=${token}` }),
       },
-      ...((method === "post" || method === "put") && body
-        ? { body: JSON.stringify(body) }
-        : {}),
+      ...(body && { body: JSON.stringify(body) }),
       ...options,
     });
 

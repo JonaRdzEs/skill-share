@@ -1,6 +1,6 @@
 export interface HttpFetchOptions {
   path: string;
-  authenticated?: boolean;
+  token?: string;
   method: "get" | "post" | "put" | "delete";
   body?: BodyInit | object;
   options?: Omit<RequestInit, "method" | "body" | "headers" | "credentials">;

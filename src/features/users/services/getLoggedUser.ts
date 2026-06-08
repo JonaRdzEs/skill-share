@@ -1,8 +1,11 @@
-import { get, ResponseCallbacks } from "@/src/helpers/http";
+import { get } from "@/src/helpers/http";
 import { UserInfo } from "@/src/types/users";
 
-type Options = ResponseCallbacks<UserInfo>;
+export async function getLoggedUser(token?: string) {
+  const response = await get<UserInfo>({ path: "/users/me", token });
+  const { isOk } = response;
+  
+  if(isOk) return { user: response.data.user };
 
-export function getLoggedUser(options?: Options) {
-  get<UserInfo>({ path: "/users/me", authenticated: true, ...options });
+  return { error: response.error };
 }

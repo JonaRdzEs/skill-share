@@ -1,9 +1,5 @@
 import { httpFetch } from "./fetchHelper";
-import type {
-  ErrorResponse,
-  HttpFetchOptions,
-  SuccessResponse,
-} from "@/src/types/http";
+import type { HttpFetchOptions } from "@/src/types/http";
 
 export interface ResponseCallbacks<T> {
   onSuccess?: (data: T) => void;
@@ -11,65 +7,22 @@ export interface ResponseCallbacks<T> {
   onSettled?: () => void;
 }
 
-type MutationOptions<T> = Omit<HttpFetchOptions, "method"> &
-  ResponseCallbacks<T>;
+type MutationOptions = Omit<HttpFetchOptions, "method">;
 
-type QueryOptions<T> = Omit<HttpFetchOptions, "method" | "body"> &
-  ResponseCallbacks<T>;
+type QueryOptions = Omit<HttpFetchOptions, "method" | "body">;
 
-function handleResponse<T>({
-  response,
-  onSuccess = () => {},
-  onError = () => {},
-  onSettled = () => {},
-}: { response: ErrorResponse | SuccessResponse<T> } & ResponseCallbacks<T>) {
-  const { isOk } = response;
-
-  if (isOk) {
-    onSuccess(response.data);
-  } else {
-    onError(response.error);
-  }
-
-  onSettled();
+export function post<T>(options: MutationOptions) {
+  return httpFetch<T>({ method: "post", ...options });
 }
 
-export async function post<T>({
-  onSuccess,
-  onError,
-  onSettled,
-  ...options
-}: MutationOptions<T>) {
-  const response = await httpFetch<T>({ method: "post", ...options });
-  handleResponse<T>({ response, onSuccess, onError, onSettled });
+export function get<T>(options: QueryOptions) {
+  return httpFetch<T>({ method: "get", ...options });
 }
 
-export async function get<T>({
-  onSuccess,
-  onError,
-  onSettled,
-  ...options
-}: QueryOptions<T>) {
-  const response = await httpFetch<T>({ method: "get", ...options });
-  handleResponse<T>({ response, onSuccess, onError, onSettled });
+export function del<T>(options: QueryOptions) {
+  return httpFetch<T>({ method: "delete", ...options });
 }
 
-export async function del<T>({
-  onSuccess,
-  onError,
-  onSettled,
-  ...options
-}: QueryOptions<T>) {
-  const response = await httpFetch<T>({ method: "delete", ...options });
-  handleResponse<T>({ response, onSuccess, onError, onSettled });
-}
-
-export async function put<T>({
-  onSuccess,
-  onError,
-  onSettled,
-  ...options
-}: MutationOptions<T>) {
-  const response = await httpFetch<T>({ method: "put", ...options });
-  handleResponse<T>({ response, onSuccess, onError, onSettled });
+export function put<T>(options: MutationOptions) {
+  return httpFetch<T>({ method: "put", ...options });
 }
