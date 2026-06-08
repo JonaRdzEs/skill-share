@@ -21,13 +21,6 @@ export function SignUpForm() {
     passConfirm: "",
   });
 
-  const onLogin = (email: string, password: string): void => {
-    login({
-      data: { email, password },
-      onSuccess: () => router.push("/home"),
-    });
-  };
-
   const handleCleanError = (e: ChangeEvent<HTMLInputElement>) => {
     const inputId = e.target.id;
 
@@ -56,12 +49,16 @@ export function SignUpForm() {
       return;
     }
     setLoading(true);
-    signup({
-      data,
-      onSuccess: () => onLogin(email, password),
-      onError: (err) => setRequestError(err),
-      onSettled: () => setLoading(false),
-    });
+    const { error: signUpError } = await signup(data);
+    setLoading(false);
+    
+    if(signUpError) {
+      setRequestError(signUpError)
+      return;
+    }
+
+    login({ email, password}).then(() => router.push("/home"));
+
   };
 
   return (

@@ -15,7 +15,7 @@ export function SignInForm() {
 
   const cleanError = () => setError("");
 
-  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const email = data.get("email") as string;
@@ -24,20 +24,20 @@ export function SignInForm() {
     if (!email || !password) return;
 
     setLoading(true);
-    login({
-      data: { email, password },
-      onSuccess: () => router.push("/home"),
-      onError: (err) => setError(err),
-      onSettled: () => setLoading(false),
-    });
+    const { error: loginError } = await login({ email, password });
+    setLoading(false);
+
+    if (loginError) {
+      setError(loginError);
+      return;
+    }
+
+    router.push("/home");
   };
 
   return (
     <form className="w-full max-w-md mt-8" onSubmit={onSubmit}>
-      <EmailInput
-        name="email"
-        onChange={cleanError}
-      />
+      <EmailInput name="email" onChange={cleanError} />
       <PasswordInput
         id="password"
         name="pass"

@@ -1,30 +1,23 @@
 "use client";
 
-import { ResponseCallbacks } from "@/src/helpers/http";
+import { API_BASE_URL } from "@/src/constants";
 import { ServerErrorResponse } from "@/src/types/http";
-import { UserInfo } from "@/src/types/users";
+import { LoginResponse } from "@/src/types/auth";
 
-interface LoginOptions extends ResponseCallbacks<UserInfo> {
-  data: {
-    email: string;
-    password: string;
-  };
+interface LoginBody {
+  email: string;
+  password: string;
 }
 
-export async function login({
-  data,
-  onSuccess = () => {},
-  onError = () => {},
-  onSettled = () => {},
-}: LoginOptions) {
+export async function login(body: LoginBody) {
   try {
-    const response = await fetch("http://localhost:3001/auth/login", {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     });
 
     const parsedResponse = await response.json();
@@ -33,11 +26,10 @@ export async function login({
       const { message } = parsedResponse as ServerErrorResponse;
       throw new Error(message);
     }
-    onSuccess(parsedResponse as UserInfo);
+    const { user } = parsedResponse as LoginResponse;
+    return { user };
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Something went wrong";
-    onError(msg);
-  } finally {
-    onSettled();
+    return { error: msg };
   }
 }

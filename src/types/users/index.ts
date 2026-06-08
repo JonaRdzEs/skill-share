@@ -12,7 +12,7 @@ export interface UserInfo {
     bio: string | null;
     location: string | null;
     photoUrl: string | null;
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt: string;
+    updatedAt: string;
   };
 }

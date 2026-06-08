@@ -1,11 +1,12 @@
 import type { SignUpData } from "@/src/types/auth";
 import type { CreatedUserResponse } from "@/src/types/auth";
-import { post, type ResponseCallbacks } from "@/src/helpers/http";
+import { post } from "@/src/helpers/http";
 
-interface SignUpOptions extends ResponseCallbacks<CreatedUserResponse> {
-  data: SignUpData;
-}
+export async function signup(body: SignUpData) {
+  const response = await  post<CreatedUserResponse>({ path: "/auth/sign-up", body });
+  const { isOk } = response;
+  
+  if(isOk) return { user: response.data.user };
 
-export function signup({ data,...rest }: SignUpOptions) {
-  post<CreatedUserResponse>({ path: "/auth/sign-up", body: data, ...rest });
+  return { error: response.error }
 }
