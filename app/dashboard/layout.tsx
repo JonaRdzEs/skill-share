@@ -1,5 +1,6 @@
 import { Sidebar, TopBar } from "@/src/components/ui";
 import { Home, User } from "@/src/components/ui/icons";
+import { PATHS } from "@/src/constants";
 import { getLoggedUser } from "@/src/features/users/services/getLoggedUser";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -22,12 +23,12 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
     {
       icon: <Home width={20} height={20} />,
       title: "Home",
-      path: "/home",
+      path: PATHS.HOME(),
     },
     {
       icon: <User variant="outlined" width={20} height={20} />,
       title: "Profile",
-      path: "/profile/me",
+      path: PATHS.MY_PROFILE(),
     },
   ];
 

@@ -7,6 +7,7 @@ import { RightArrow } from "@/src/components/ui/icons";
 import { EmailInput } from "../EmailInput";
 import { PasswordInput } from "../PasswordInput";
 import { login } from "../../services/login";
+import { PATHS } from "@/src/constants";
 
 export function SignInForm() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export function SignInForm() {
       return;
     }
 
-    router.push("/home");
+    router.push(PATHS.HOME());
   };
 
   return (

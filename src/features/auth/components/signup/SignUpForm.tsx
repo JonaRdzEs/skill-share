@@ -9,6 +9,7 @@ import { PasswordInput } from "../PasswordInput";
 import { signup } from "../../services/signup";
 import { validateForm } from "@/src/helpers/signupForm";
 import { login } from "../../services/login";
+import { PATHS } from "@/src/constants";
 
 export function SignUpForm() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export function SignUpForm() {
       return;
     }
 
-    login({ email, password}).then(() => router.push("/home"));
+    login({ email, password}).then(({ user }) =>  user?.id && router.push(PATHS.HOME()));
 
   };
 

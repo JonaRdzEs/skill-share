@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/src/components/ui";
+import { PATHS } from "@/src/constants";
 import { RightArrow, Star } from "@/src/components/ui/icons";
 
 export function HeroSection() {
@@ -22,14 +23,14 @@ export function HeroSection() {
         </p>
         <div className="flex justify-center items-center gap-5 mt-8 flex-wrap md:justify-start">
           <Link
-            href="/signup"
+            href={PATHS.SIGN_IN()}
             className="flex justify-center items-center gap-2 rounded-lg bg-primary text-white p-4 w-50 hover:bg-blue-600 hover:scale-105 transition-all"
           >
             Start Learning
             <RightArrow />
           </Link>
           <Link
-            href="/signup"
+            href={PATHS.SIGN_UP()}
             className="block text-center border-2 border-secondary-txt/20 w-50 bg-white hover:bg-gray-100 rounded-lg text-primary-txt p-4 "
           >
             Become an Instructor

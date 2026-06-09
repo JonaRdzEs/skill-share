@@ -1,5 +1,6 @@
 import { Book } from "@/src/components/ui/icons";
 import { FooterLink } from "../components/index";
+import { PATHS } from "@/src/constants";
 
 export function Footer() {
   return (
@@ -19,12 +20,12 @@ export function Footer() {
       <div className="flex flex-wrap justify-start items-center gap-10 sm:justify-around">
         <div className="my-6">
           <h6 className="font-semibold text-white text-lg mb-3">Learn</h6>
-          <FooterLink path="/signin" text="Browse courses" />
+          <FooterLink path={PATHS.SIGN_IN()} text="Browse courses" />
           <FooterLink path="#popular-categories" text="Categories" />
         </div>
         <div>
           <h6 className="font-semibold text-white text-lg mb-3">Teach</h6>
-          <FooterLink path="/signin" text="Become Instructor" />
+          <FooterLink path={PATHS.SIGN_IN()} text="Become Instructor" />
           <FooterLink path="#testimonials" text="Success Stories" />
         </div>
       </div>
