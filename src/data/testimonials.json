@@ -1,0 +1,25 @@
+{
+  "testimonials": [
+    {
+      "content": "SkillShare transformed my career! I learned web design from scratch and now I freelance full-time. The instructors are amazing and the community is so supportive.",
+      "user": {
+        "name": "Sarah Johnson",
+        "title": "Graphic Designer"
+      }
+    },
+    {
+      "content": "As an instructor, SkillShare gave me the platform to share my marketing expertise with thousands of students. The interface is intuitive and the support team is top-notch.",
+      "user": {
+        "name": "Michael Chen",
+        "title": "Marketing Expert"
+      }
+    },
+    {
+      "content": "The flexibility of SkillShare is unmatched. I learned Python while working full-time, and the bite-sized sessions made it possible. Highly recommend!",
+      "user": {
+        "name": "Emily Rodriguez",
+        "title": "Software Developer"
+      }
+    }
+  ]
+}
