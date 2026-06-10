@@ -1,13 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #3B82F6;
-  --color-primary-dark: #1E40AF;
-  --color-secondary: #10B981;
-  --color_accent: #FACC15;
-  --color-background: #F9FAFB;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1e40af;
+  --color-secondary: #10b981;
+  --color_accent: #facc15;
+  --color-background: #f9fafb;
   --color-primary-txt: #111827;
-  --color-secondary-txt: #6B7280;
-  --color-error: #EF4444;
+  --color-secondary-txt: #6b7280;
+  --color-error: #ef4444;
 
+  --animate-loader: loader 3s ease-in-out infinite;
+  --animate-draw: draw 3s ease-in-out infinite;
+
+  @keyframes draw {
+    0% {
+      stroke-dashoffset: var(--dash);
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes loader {
+    0%{
+      transform: scale(0)
+    }
+    50% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0.5);
+    }
+  }
 }

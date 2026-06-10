@@ -1,8 +1,8 @@
+import { cookies } from "next/headers";
 import { Sidebar, TopBar } from "@/src/components/ui";
 import { Home, User } from "@/src/components/ui/icons";
 import { PATHS } from "@/src/constants";
 import { getLoggedUser } from "@/src/features/users/services/getLoggedUser";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -11,13 +11,13 @@ interface Props {
 
 export default async function HomeLayout({ children }: Readonly<Props>) {
   const cookieStore = await cookies();
-  const token = cookieStore.get("access_token")?.value;
+  const accessToken = cookieStore.get("access_token")?.value;
 
-  const response = await getLoggedUser(token);
+  const getUserResponse = await getLoggedUser(accessToken);
 
-  if (response.error) redirect("/");
+  if(getUserResponse.error) redirect(PATHS.SIGN_IN());
 
-  const { name, email, photoUrl = "" } = response.user!;
+  const user = getUserResponse.user!;
 
   const links = [
     {
@@ -34,7 +34,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
 
   return (
     <>
-      <TopBar className="fixed right-0 left-0 top-0" user={{ name, email, photoUrl }} />
+      <TopBar className="fixed right-0 left-0 top-0" user={user} />
       <div className="flex min-h-screen pt-14">
         <Sidebar links={links} />
         <section className="grow py-6 px-10">{children}</section>
