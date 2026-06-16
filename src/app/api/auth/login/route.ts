@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     });
 
     const parsedResponse = await resp.json();
-
+    console.log("parsed response in login",{ parsedResponse });
     if (!resp.ok) {
       const errorServerResp = parsedResponse as ServerErrorResponse;
       return NextResponse.json(
