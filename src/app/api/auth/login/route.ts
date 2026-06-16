@@ -45,8 +45,7 @@ export async function POST(request: NextRequest) {
     });
 
     return nextResponse;
-  } catch (error){
-    console.log("ERROR IN LOGIN", error);
+  } catch {
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
