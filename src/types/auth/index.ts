@@ -21,4 +21,6 @@ export interface LoginResponse {
     location: string | null;
     photoUrl: string | null;
   };
+  accessToken: string;
+  refreshToken: string;
 }

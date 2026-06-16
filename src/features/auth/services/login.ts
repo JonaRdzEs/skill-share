@@ -1,6 +1,5 @@
 "use client";
 
-import { API_BASE_URL } from "@/src/constants";
 import { ServerErrorResponse } from "@/src/types/http";
 import { LoginResponse } from "@/src/types/auth";
 
@@ -11,9 +10,8 @@ interface LoginBody {
 
 export async function login(body: LoginBody) {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

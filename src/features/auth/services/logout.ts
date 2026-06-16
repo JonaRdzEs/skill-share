@@ -1,13 +1,11 @@
 "use client";
 
-import { API_BASE_URL } from "@/src/constants";
 import { ServerErrorResponse } from "@/src/types/http";
 
 export async function logout() {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch("/api/auth/logout", {
       method: "POST",
-      credentials: "include",
     });
 
     const parsedResponse = await response.json();

@@ -1,7 +1,6 @@
-import { cookies } from "next/headers";
 import { Sidebar, TopBar } from "@/src/components/ui";
 import { Home, User } from "@/src/components/ui/icons";
-import { PATHS } from "@/src/constants";
+import { APP_BASE_URL, PATHS } from "@/src/constants";
 import { getLoggedUser } from "@/src/features/users/services/getLoggedUser";
 import { redirect } from "next/navigation";
 
@@ -10,12 +9,12 @@ interface Props {
 }
 
 export default async function HomeLayout({ children }: Readonly<Props>) {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("access_token")?.value;
+  const getUserResponse = await getLoggedUser();
 
-  const getUserResponse = await getLoggedUser(accessToken);
-
-  if(getUserResponse.error) redirect(PATHS.SIGN_IN());
+  if (getUserResponse.error) {
+    await fetch(`${APP_BASE_URL}/api/auth/logout`, { method: "POST" });
+    redirect(PATHS.SIGN_IN());
+  }
 
   const user = getUserResponse.user!;
 
