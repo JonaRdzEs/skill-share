@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     });
 
     const parsedResponse = await resp.json();
-    console.log("parsed response in login",{ parsedResponse });
+    
     if (!resp.ok) {
       const errorServerResp = parsedResponse as ServerErrorResponse;
       return NextResponse.json(
@@ -45,7 +45,8 @@ export async function POST(request: NextRequest) {
     });
 
     return nextResponse;
-  } catch {
+  } catch (error){
+    console.log("ERROR IN LOGIN", error);
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
