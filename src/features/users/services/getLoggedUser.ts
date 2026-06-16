@@ -1,11 +1,30 @@
-import { get } from "@/src/helpers/http";
+import { cookies } from "next/headers";
+import { ServerErrorResponse } from "@/src/types/http";
 import { UserInfo } from "@/src/types/users";
+import { API_BASE_URL } from "@/src/constants";
 
-export async function getLoggedUser(token?: string) {
-  const response = await get<UserInfo>({ path: "/users/me", token });
-  const { isOk } = response;
-  
-  if(isOk) return { user: response.data.user };
+export async function getLoggedUser() {
+  const cookiesStore = await cookies();
 
-  return { error: response.error };
+  const token = cookiesStore.get("access_token")?.value;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
+      headers: {
+        Cookie: `access_token=${token}`,
+      }
+    });
+
+    const parsedResponse = await response.json();
+
+    if (!response.ok) {
+      const { message } = parsedResponse as ServerErrorResponse;
+      throw new Error(message);
+    }
+    const { user } = parsedResponse as UserInfo;
+    return { user };
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Something went wrong";
+    return { error: msg };
+  }
 }

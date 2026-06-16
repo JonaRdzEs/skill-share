@@ -1,13 +1,19 @@
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { API_BASE_URL } from "./src/constants";
+import { API_BASE_URL } from "./constants";
+
+interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 export async function proxy(request: NextRequest) {
-  const accessToken = request.cookies.get("access_token")?.value;
-  const refreshToken = request.cookies.get("refresh_token")?.value;
-
+  const cookiesStore = await cookies();
+  const accessToken = cookiesStore.get("access_token")?.value;
+  const refreshToken = cookiesStore.get("refresh_token")?.value;
   const { pathname } = request.nextUrl;
 
-  // To avoid an authenticated user to visit auth pages
+  // To avoid an authenticated user to visit public auth pages
   if (
     (pathname === "/signin" || pathname === "/signup") &&
     (accessToken || refreshToken)
@@ -36,33 +42,20 @@ export async function proxy(request: NextRequest) {
       if (!backendResponse.ok) throw new Error("Error refreshing token");
 
       const nextResponse = NextResponse.next();
-
-      const setCookieHeaders = backendResponse.headers.getSetCookie();
-
-      if (setCookieHeaders.length > 0) {
-        // Append backend cookies to the response
-        setCookieHeaders.forEach((cookie) => {
-          nextResponse.headers.append("Set-Cookie", cookie);
-        });
-
-        const newAccessToken = setCookieHeaders.find((value) =>
-          value.startsWith("access_token=")
-        );
-        const newRefreshToken = setCookieHeaders.find((value) =>
-          value.startsWith("refresh_token=")
-        );
-
-        // Sync new cookies with client cookies
-        if (newAccessToken) {
-          request.cookies.set("access_token", newAccessToken.split("=")[1]);
-        }
-
-        if (newRefreshToken) {
-          request.cookies.set("refresh_token", newRefreshToken.split("=")[1]);
-        }
-
-        nextResponse.headers.set("cookie", request.cookies.toString());
+      const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+        (await backendResponse.json()) as RefreshTokenResponse;
+      
+      // Sync new cookies with client cookies
+      if (newAccessToken) {
+        cookiesStore.set("access_token", newAccessToken);
       }
+
+      if (newRefreshToken) {
+        cookiesStore.set("refresh_token", newRefreshToken);
+      }
+
+      nextResponse.headers.set("cookie", request.cookies.toString());
+
       return nextResponse;
     } catch {
       const signInResponse = NextResponse.redirect(
