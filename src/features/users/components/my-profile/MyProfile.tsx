@@ -11,9 +11,9 @@ export async function MyProfile() {
 
   if (resp.error) redirect(PATHS.HOME());
 
-  const { name, email, photoUrl, bio, location } = resp.user!;
+  const { name, email, photoUrl, bio, location, role } = resp.user!;
   return (
-    <div className="">
+    <div className="pt-10">
       <div className="w-full flex justify-center items-center flex-col gap-3 relative">
         <div className="w-28 h-28 border-4 border-primary rounded-full absolute -top-2" />
         {photoUrl ? (
@@ -32,7 +32,7 @@ export async function MyProfile() {
         <p className="font-semibold text-primary-txt text-lg text-center">{name}</p>
       </div>
 
-      <EditUserForm {...{ name, email, bio, location }} />
+      <EditUserForm {...{ name, email, bio, location, role }} />
     </div>
   );
 }

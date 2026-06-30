@@ -2,22 +2,23 @@
 
 import { type ChangeEvent, type SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Input, TextArea, /* Switch */ } from "@/src/components/ui";
+import { Button, Input, TextArea } from "@/src/components/ui";
 import { EmailInput } from "@/src/features/auth/components/EmailInput";
-import { User, MapPin, /* AcademicCap */ } from "@/src/components/ui/icons";
+import { User, MapPin } from "@/src/components/ui/icons";
 import { useInput } from "@/src/hooks/useInput";
 import { updateUserInfo } from "../../services/updateUserInfo";
-//import { TeacherSkills } from "./TeacherSkills";
+import { TeacherSkillsSection } from "./teacher-section/TeacherSkillsSection";
 
 interface Props {
   name: string;
   email: string;
   location: string | null;
   bio: string | null;
+  role: "student" | "teacher";
 }
 
-export function EditUserForm({ name, email, location, bio }: Props) {
-  //const [isTeacher, setIsTeacher] = useState<boolean>(false);
+export function EditUserForm({ name, email, location, bio, role }: Props) {
+  const [isTeacher, setIsTeacher] = useState<boolean>(role === "teacher");
   const [loading, setLoading] = useState<boolean>(false);
   const [bioInputValue, setBioInputValue] = useState<string>(bio ?? "");
   const { value: nameInputValue, onChange: onNameChange } = useInput(name);
@@ -27,7 +28,7 @@ export function EditUserForm({ name, email, location, bio }: Props) {
 
   const router = useRouter();
 
-  //const onToggleTeacher = () => setIsTeacher((prev) => !prev);
+  const onToggleTeacher = () => setIsTeacher((prev) => !prev);
   const handleBioChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setBioInputValue(e.target.value);
 
@@ -36,8 +37,9 @@ export function EditUserForm({ name, email, location, bio }: Props) {
     setLoading(true);
     const resp = await updateUserInfo({
       username: nameInputValue,
-      ...(locationInputValue && { location: locationInputValue }),
-      ...(bioInputValue && { bio: bioInputValue }),
+      location: locationInputValue || null,
+      bio: bioInputValue || null,
+      role: isTeacher ? "teacher" : "student",
     });
     setLoading(false);
     if (resp.error) {
@@ -83,21 +85,10 @@ export function EditUserForm({ name, email, location, bio }: Props) {
         value={bioInputValue}
         onChange={handleBioChange}
       />
-
-      {/* <div className="bg-gray-200 rounded-sm my-5 p-3 flex justify-start items-center gap-3">
-        <AcademicCap />
-        <p className="text-primary-txt font-semibold text-sm grow">
-          Become a Teacher
-        </p>
-        <Switch
-          id="become-teacher"
-          ariaLabel="Toggle teacher mode"
-          variant="success"
-          checked={isTeacher}
-          onChange={onToggleTeacher}
-        />
-      </div> */}
-      {/* {isTeacher && <TeacherSkills />} */}
+      <TeacherSkillsSection
+        isTeacher={isTeacher}
+        onToggleTeacher={onToggleTeacher}
+      />
       <Button
         className="w-full max-w-none"
         variant="primary"

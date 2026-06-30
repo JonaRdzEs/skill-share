@@ -2,8 +2,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_BASE_URL;
 const APP_ENV = process.env.NODE_ENV;
 
-const ACCESS_TOKEN_MAX_AGE = 20 * 60 * 1000; // 20 minutes;
-const REFRESH_TOKEN_MAX_AGE = 10 * 60 * 60 * 60 * 1000; // 10 days
+const ACCESS_TOKEN_MAX_AGE = 20 * 60; // 20 minutes;
+const REFRESH_TOKEN_MAX_AGE = 10 * 60 * 60 * 24; // 10 days
 
 const PATHS = {
   ROOT: () => "/",

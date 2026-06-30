@@ -6,8 +6,9 @@ import { API_BASE_URL } from "@/src/constants";
 
 interface UserInfoBody {
   username: string;
-  location?: string;
-  bio?: string;
+  location?: string | null;
+  bio?: string | null;
+  role?: "student" | "teacher";
 }
 
 export async function updateUserInfo(body: UserInfoBody) {

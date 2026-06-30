@@ -6,8 +6,9 @@ interface Props {
   className?: string;
   user: {
     name: string;
-    email: string;
+    role: "student" | "teacher";
     photoUrl: string | null;
+
   }
 }
 

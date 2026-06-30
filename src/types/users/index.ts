@@ -10,6 +10,7 @@ export interface UserInfo {
     name: BasicInfoUser["name"];
     email: BasicInfoUser["email"];
     bio: string | null;
+    role: "student" | "teacher";
     location: string | null;
     photoUrl: string | null;
     createdAt: string;
