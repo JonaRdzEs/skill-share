@@ -1,6 +1,6 @@
 import { Sidebar, TopBar } from "@/src/components/ui";
 import { Home, User } from "@/src/components/ui/icons";
-import { APP_BASE_URL, PATHS } from "@/src/constants";
+import { PATHS } from "@/src/constants";
 import { getLoggedUser } from "@/src/features/users/services/getLoggedUser";
 import { redirect } from "next/navigation";
 
@@ -10,9 +10,7 @@ interface Props {
 
 export default async function HomeLayout({ children }: Readonly<Props>) {
   const getUserResponse = await getLoggedUser();
-
   if (getUserResponse.error) {
-    await fetch(`${APP_BASE_URL}/api/auth/logout`, { method: "POST" });
     redirect(PATHS.SIGN_IN());
   }
 
@@ -36,7 +34,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
       <TopBar className="fixed right-0 left-0 top-0" user={user} />
       <div className="flex min-h-screen pt-14">
         <Sidebar links={links} />
-        <section className="grow py-6 px-10">{children}</section>
+        <section className="grow py-6 px-3 sm:px-10 bg-white">{children}</section>
       </div>
     </>
   );

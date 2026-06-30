@@ -16,3 +16,13 @@ export interface UserInfo {
     updatedAt: string;
   };
 }
+
+export interface UpdatedUserResponse {
+  user: {
+    id: string;
+    photoUrl: string | undefined;
+    username?: string;
+    bio?: string;
+    location: string;
+  };
+}

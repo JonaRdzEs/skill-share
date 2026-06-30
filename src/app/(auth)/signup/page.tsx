@@ -22,7 +22,7 @@ export default function SignUpPage() {
             Join thousands of learners and instructors
           </p>
           <SignUpForm />
-          <div className="flex justify-center items-center gap-3">
+          <div className="flex justify-center items-center gap-3 flex-wrap">
             <p className="text-secondary-txt text-sm">
               Already have an account?
             </p>

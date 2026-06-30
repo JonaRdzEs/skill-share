@@ -33,7 +33,7 @@ export default function SignInPage() {
             Access your learning dashboard
           </p>
           <SignInForm />
-          <div className="flex justify-center items-center gap-3">
+          <div className="flex justify-center items-center gap-3 flex-wrap">
             <p className="text-secondary-txt text-sm">{"Don't have an account?"}</p>
             <Link href="/signup" variant="primary" className="font-semibold text-sm">Sign up for free</Link>
           </div>

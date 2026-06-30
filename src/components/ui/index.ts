@@ -4,5 +4,7 @@ export * from "./HomeLink";
 export * from "./Input";
 export * from "./Link";
 export * from "./Sidebar/Sidebar";
+export * from "./Switch";
+export * from "./TextArea";
 export * from "./TextError";
 export * from "./TopBar";

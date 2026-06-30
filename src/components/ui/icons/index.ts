@@ -1,3 +1,4 @@
+export * from "./AcademicCap";
 export * from "./Award";
 export * from "./Book";
 export * from "./Certificate";
@@ -6,6 +7,7 @@ export * from "./Clock";
 export * from "./Email";
 export * from "./Eye";
 export * from "./Home";
+export * from "./MapPin";
 export * from "./LockPassword";
 export * from "./Logout";
 export * from "./RightArrow";

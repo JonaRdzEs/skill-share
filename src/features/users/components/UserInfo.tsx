@@ -1,14 +1,15 @@
 import { User } from "@/src/components/ui/icons";
 
 interface Props {
+  className?: string;
   name: string;
   email: string;
   photoUrl: string | null;
 }
 
-export function UserInfo({ name, email, photoUrl }: Props) {
+export function UserInfo({ className = "", name, email, photoUrl }: Props) {
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className={`flex justify-center items-center gap-2 ${className}`}>
       <div className="flex flex-col items-end">
         <p className="text-xs font-semibold text-primary-txt">{name}</p>
         <span className="text-xs text-secondary-txt capitalize">{email}</span>

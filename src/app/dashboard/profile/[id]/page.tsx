@@ -1,15 +1,16 @@
+import { MyProfile } from "@/src/features/users/components/my-profile/MyProfile";
+import { UserProfile } from "@/src/features/users/components/user-profile/UserProfile";
+
 interface Props {
-  params: Promise<{id: string}>
+  params: Promise<{ id: string }>;
 }
 
 export default async function ProfilePage({ params }: Props) {
+  const { id } = await params;
 
-  const {id} = await params;
-  console.log(id);
-  return (
-    <div>
-      <h1>Profile page {id}</h1>
-      
-    </div>
-  );
+  if (id === "me") {
+    return <MyProfile />;
+  }
+
+  return <UserProfile userId={id} /> ;
 }
