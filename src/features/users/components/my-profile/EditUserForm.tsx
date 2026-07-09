@@ -8,6 +8,7 @@ import { User, MapPin } from "@/src/components/ui/icons";
 import { useInput } from "@/src/hooks/useInput";
 import { updateUserInfo } from "../../services/updateUserInfo";
 import { TeacherSkillsSection } from "./teacher-section/TeacherSkillsSection";
+import { UserSkill } from "@/src/types/users";
 
 interface Props {
   name: string;
@@ -15,9 +16,17 @@ interface Props {
   location: string | null;
   bio: string | null;
   role: "student" | "teacher";
+  skills: UserSkill[];
 }
 
-export function EditUserForm({ name, email, location, bio, role }: Props) {
+export function EditUserForm({
+  name,
+  email,
+  location,
+  bio,
+  role,
+  skills,
+}: Props) {
   const [isTeacher, setIsTeacher] = useState<boolean>(role === "teacher");
   const [loading, setLoading] = useState<boolean>(false);
   const [bioInputValue, setBioInputValue] = useState<string>(bio ?? "");
@@ -86,6 +95,7 @@ export function EditUserForm({ name, email, location, bio, role }: Props) {
         onChange={handleBioChange}
       />
       <TeacherSkillsSection
+        skills={skills}
         isTeacher={isTeacher}
         onToggleTeacher={onToggleTeacher}
       />

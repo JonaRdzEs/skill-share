@@ -27,3 +27,17 @@ export interface UpdatedUserResponse {
     location: string;
   };
 }
+
+export interface UserSkill {
+  id: number;
+  description: string | null;
+  createdAt: Date;
+  skill_id: number;
+}
+
+export interface UserSkillsResponse {
+  user: {
+    id: string;
+    skills: UserSkill[];
+  };
+}

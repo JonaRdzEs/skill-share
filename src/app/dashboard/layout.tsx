@@ -31,7 +31,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
 
   return (
     <>
-      <TopBar className="fixed right-0 left-0 top-0" user={user} />
+      <TopBar className="fixed right-0 left-0 top-0 z-10" user={user} />
       <div className="flex min-h-screen pt-14">
         <Sidebar links={links} />
         <section className="grow py-6 px-3 sm:px-10 bg-white">{children}</section>
