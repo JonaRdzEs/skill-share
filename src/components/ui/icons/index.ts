@@ -10,6 +10,7 @@ export * from "./Home";
 export * from "./MapPin";
 export * from "./LockPassword";
 export * from "./Logout";
+export * from "./Plus";
 export * from "./RightArrow";
 export * from "./Shield";
 export * from "./SlashEye";
