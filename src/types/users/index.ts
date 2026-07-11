@@ -1,3 +1,5 @@
+import { Skill } from "../skills";
+
 export interface BasicInfoUser {
   id: string;
   name: string;
@@ -32,7 +34,7 @@ export interface UserSkill {
   id: number;
   description: string | null;
   createdAt: Date;
-  skill_id: number;
+  skill: Skill
 }
 
 export interface UserSkillsResponse {
@@ -40,4 +42,13 @@ export interface UserSkillsResponse {
     id: string;
     skills: UserSkill[];
   };
+}
+
+export interface AddedUserSkillsResponse {
+  skills: {
+    userSkillId: number;
+    description: string | null;
+    name: string;
+    createdAt: Date,
+  }[];
 }

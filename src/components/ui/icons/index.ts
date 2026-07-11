@@ -18,3 +18,4 @@ export * from "./Star";
 export * from "./TrendingUp";
 export * from "./User";
 export * from "./UsersGroup";
+export * from "./X";

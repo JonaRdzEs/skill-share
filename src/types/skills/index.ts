@@ -6,3 +6,7 @@ export interface Skill {
 export interface SearchSkillsResponse {
   skills: Skill[],
 }
+
+export interface CreateSkillsResponse {
+  skills: Skill[],
+}
