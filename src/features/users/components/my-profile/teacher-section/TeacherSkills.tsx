@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { XIcon } from "@/src/components/ui/icons";
 import { UserSkill } from "@/src/types/users";
 import { AddSkills } from "./AddSkills";
@@ -15,7 +14,6 @@ interface Props {
 
 export function TeacherSkills({ skills }: Props) {
   const [userSkills, setUserSkills] = useState<UserSkill[]>(skills);
-  const router = useRouter();
 
   const onAddSkill = async (skill: Skill) => {
     const existingSkill = userSkills.find(
@@ -44,7 +42,8 @@ export function TeacherSkills({ skills }: Props) {
   const handleDeleteSkill = async (userSkillId: number) => {
     const resp = await deleteUserSkills([userSkillId]);
     if (resp?.error) return;
-    router.refresh();
+    const updatedSkills = userSkills.filter((userSkill) => userSkill.id !== userSkillId);
+    setUserSkills(updatedSkills);
   };
 
   return (
@@ -62,11 +61,11 @@ export function TeacherSkills({ skills }: Props) {
               className="flex justify-center items-center gap-2 bg-primary/70 text-white rounded-2xl text-sm w-auto py-1 px-3"
             >
               {userSkill.skill.name}
-              <button aria-label={`Delete ${userSkill.skill.name} skill`} onClick={() => handleDeleteSkill(userSkill.id)}>
+              <button aria-label={`Delete ${userSkill.skill.name} skill`} type="button" onClick={() => handleDeleteSkill(userSkill.id)}>
                 <XIcon
                   width={14}
                   height={14}
-                  className="transition-colors hover:stroke-red-500 hover:cursor-pointer"
+                  className="transition-colors hover:stroke-red-400 hover:cursor-pointer"
                 />
               </button>
             </span>

@@ -37,7 +37,7 @@ export function AddSkills({ onAddSkill = () => {} }: Props) {
   };
 
   return (
-    <div className="mt-3 flex justify-center items-center gap-2 [&_div:first-of-type]:grow">
+    <div className="mt-3 flex justify-stretch items-center gap-2 [&_div:first-of-type]:grow">
       <AutoComplete
         data={filteredSkills}
         onInputChange={debounce(handleChange, 600)}
@@ -48,7 +48,7 @@ export function AddSkills({ onAddSkill = () => {} }: Props) {
       />
       <button
         type="button"
-        className="flex justify-center items-center gap-2 h-8 text-sm w-full text-primary max-w-32 bg-gray-50 hover:cursor-pointer hover:bg-gray-200 rounded-sm py-1 px-2"
+        className="flex justify-center items-center gap-2 h-8 text-sm w-full text-primary sm:max-w-46 bg-gray-50 hover:cursor-pointer hover:bg-gray-200 rounded-sm py-1 px-2"
       >
         Add skill
         <Plus width={16} height={16} />

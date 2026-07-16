@@ -100,7 +100,7 @@ export function EditUserForm({
         onToggleTeacher={onToggleTeacher}
       />
       <Button
-        className="w-full max-w-none"
+        className="w-full max-w-none mt-16"
         variant="primary"
         type="submit"
         loading={loading}
