@@ -1,5 +1,6 @@
 export * from "./AcademicCap";
 export * from "./Award";
+export * from "./BoardTeacher";
 export * from "./Book";
 export * from "./Certificate";
 export * from "./Checkbox";

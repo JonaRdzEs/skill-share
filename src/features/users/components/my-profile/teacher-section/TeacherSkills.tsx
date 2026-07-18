@@ -6,6 +6,7 @@ import { UserSkill } from "@/src/types/users";
 import { AddSkills } from "./AddSkills";
 import { createUserSkills } from "../../../services/createUserSkills";
 import { deleteUserSkills } from "../../../services/deleteUserSkills";
+import { SkillBadge } from "@/src/features/skills/components/SkillBadge";
 import { Skill } from "@/src/types/skills";
 
 interface Props {
@@ -56,7 +57,7 @@ export function TeacherSkills({ skills }: Props) {
       {userSkills.length > 0 && (
         <div className="my-4 flex justify-start items-center gap-2 flex-wrap">
           {userSkills.map((userSkill) => (
-            <span
+            <SkillBadge
               key={userSkill.id}
               className="flex justify-center items-center gap-2 bg-primary/70 text-white rounded-2xl text-sm w-auto py-1 px-3"
             >
@@ -68,7 +69,7 @@ export function TeacherSkills({ skills }: Props) {
                   className="transition-colors hover:stroke-red-400 hover:cursor-pointer"
                 />
               </button>
-            </span>
+            </SkillBadge>
           ))}
         </div>
       )}
