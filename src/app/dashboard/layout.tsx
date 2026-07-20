@@ -24,7 +24,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
     },
     {
       icon: <User variant="outlined" width={20} height={20} />,
-      title: "Profile",
+      title: "My Profile",
       path: PATHS.MY_PROFILE(),
     },
     {

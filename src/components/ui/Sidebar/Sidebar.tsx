@@ -7,7 +7,7 @@ interface Props {
 
 export function Sidebar({ links }: Props) {
   return (
-    <aside className="hidden sm:w-46 lg:w-56 border-r border-gray-200 bg-white sm:flex sm:flex-col">
+    <aside className="hidden sm:min-w-46 sm:w-46 lg:min-w-56 lg:w-56 border-r border-gray-200 bg-white sm:flex sm:flex-col">
       <ul className="py-6 px-3 grow">
         {links.map((link, idx) => (
           <li key={`${link.title}-${idx}`}>

@@ -13,6 +13,7 @@ export * from "./LockPassword";
 export * from "./Logout";
 export * from "./Plus";
 export * from "./RightArrow";
+export * from "./Search";
 export * from "./Shield";
 export * from "./SlashEye";
 export * from "./Star";

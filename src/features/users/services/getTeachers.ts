@@ -2,13 +2,13 @@ import { cookies } from "next/headers";
 import { ServerErrorResponse } from "@/src/types/http";
 import { API_BASE_URL } from "@/src/constants";
 
-export async function getTeachers() {
+export async function getTeachers(query: string) {
   const cookiesStore = await cookies();
 
   const token = cookiesStore.get("access_token")?.value;
 
   try {
-    const response = await fetch(`${API_BASE_URL}/users/teachers/top-rated`, {
+    const response = await fetch(`${API_BASE_URL}/users/teachers/top-rated${query.trim() ? `?name=${query}` : ""}`, {
       headers: {
         Cookie: `access_token=${token}`,
       },
