@@ -6,6 +6,14 @@ export interface BasicInfoUser {
   email: string;
 }
 
+export interface TeacherCardInfo {
+  photoUrl: string | null;
+  skills: string[];
+  id: string;
+  bio: string | null;
+  name: string;
+}
+
 export interface UserInfo {
   user: {
     id: BasicInfoUser["id"];
@@ -34,7 +42,7 @@ export interface UserSkill {
   id: number;
   description: string | null;
   createdAt: Date;
-  skill: Skill
+  skill: Skill;
 }
 
 export interface UserSkillsResponse {
@@ -49,6 +57,12 @@ export interface AddedUserSkillsResponse {
     userSkillId: number;
     description: string | null;
     name: string;
-    createdAt: Date,
+    createdAt: Date;
   }[];
+}
+
+export interface GetTeachersResponse {
+  teachers: TeacherCardInfo[];
+  totalCount: number;
+  totalPages: number;
 }

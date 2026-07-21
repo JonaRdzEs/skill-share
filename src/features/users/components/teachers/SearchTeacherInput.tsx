@@ -21,6 +21,7 @@ export function SearchTeacherInput() {
 
     if (value.trim()) {
       params.set("name", value);
+      params.delete("page");
     } else {
       params.delete("name");
     }

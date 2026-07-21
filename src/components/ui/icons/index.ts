@@ -4,6 +4,8 @@ export * from "./BoardTeacher";
 export * from "./Book";
 export * from "./Certificate";
 export * from "./Checkbox";
+export * from "./ChevronLeft";
+export * from "./ChevronRight";
 export * from "./Clock";
 export * from "./Email";
 export * from "./Eye";
