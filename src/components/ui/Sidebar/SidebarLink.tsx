@@ -15,7 +15,7 @@ export function SidebarLink({ icon, title, path }: Props) {
   return (
     <Link
       className={`flex justify-center items-center gap-2 h-10 rounded-md my-2 ${
-        pathname === path
+        pathname.startsWith(path)
           ? "bg-primary/10 text-primary"
           : "hover:bg-primary/5 text-gray-600"
       }`}

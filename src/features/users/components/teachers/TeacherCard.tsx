@@ -9,13 +9,13 @@ interface Props {
   skills: string[];
 }
 
-const MIN_SKILLS_LENGTH = 5;
+const MIN_SKILLS_LENGTH = 3;
 
 export function TeacherCard({ id, name, photoUrl, bio, skills }: Props) {
   return (
     <Link
       variant="unstyled"
-      href={`/dashboard/profile/${id}`}
+      href={`/dashboard/teachers/${id}`}
       className="flex gap-3 min-h-32 h-full shadow-sm rounded-md px-5 py-3 hover:bg-background"
     >
       <Avatar src={photoUrl} size="md" />
@@ -25,7 +25,7 @@ export function TeacherCard({ id, name, photoUrl, bio, skills }: Props) {
         {skills.length > 0 && (
           <div className="flex justify-start items-center gap-1 flex-wrap">
             {skills.slice(0, MIN_SKILLS_LENGTH).map((s, index) => (
-              <SkillBadge key={`${s}-${index}`} className="text-xs">{s}</SkillBadge>
+              <SkillBadge key={`${s}-${index}`} className="text-xs bg-primary/10">{s}</SkillBadge>
             ))}
             {skills.length > MIN_SKILLS_LENGTH && (
               <span className="text-primary-txt text-xs">+{skills.length - MIN_SKILLS_LENGTH} more</span>

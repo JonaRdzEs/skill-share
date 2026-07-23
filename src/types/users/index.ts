@@ -66,3 +66,29 @@ export interface GetTeachersResponse {
   totalCount: number;
   totalPages: number;
 }
+
+export interface GetTeacherByIdResponse {
+  teacher: {
+    id: string;
+    email: string;
+    name: string;
+    bio: string | null;
+    location: string | null;
+    photoUrl: string | null;
+    role: "teacher";
+    skills: {
+      id: number;
+      createdAt: Date;
+      skill: Skill
+    }[];
+    targetReviews: {
+      id: number;
+      createdAt: Date;
+      rating: number;
+      comment: string | null;
+      session_id: string;
+      author_id: string;
+      target_id: string;
+    }[];
+  };
+}

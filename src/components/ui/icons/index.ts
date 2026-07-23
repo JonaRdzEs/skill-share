@@ -1,4 +1,5 @@
 export * from "./AcademicCap";
+export * from "./AcademicCapOff";
 export * from "./Award";
 export * from "./BoardTeacher";
 export * from "./Book";
@@ -11,6 +12,7 @@ export * from "./Email";
 export * from "./Eye";
 export * from "./Home";
 export * from "./MapPin";
+export * from "./MessageOff";
 export * from "./LockPassword";
 export * from "./Logout";
 export * from "./Plus";
