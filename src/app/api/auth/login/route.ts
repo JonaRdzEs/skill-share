@@ -1,5 +1,6 @@
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { API_BASE_URL, APP_ENV } from "@/src/constants";
+import { API_BASE_URL, REFRESH_TOKEN_MAX_AGE, ACCESS_TOKEN_MAX_AGE, cookieOptions } from "@/src/constants";
 import { ServerErrorResponse } from "@/src/types/http";
 import { LoginResponse } from "@/src/types/auth";
 
@@ -25,25 +26,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const cookieStore = await cookies(); 
     const { user, accessToken, refreshToken } = parsedResponse as LoginResponse;
     const nextResponse = NextResponse.json({ user }, { status: resp.status });
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: APP_ENV === "production",
-      sameSite: "lax" as boolean | "lax" | "strict" | "none" | undefined,
-    };
 
     nextResponse.cookies.set("access_token", accessToken, {
       ...cookieOptions,
-      maxAge: 20 * 60 * 1000, // 20 minutes,
+      maxAge: ACCESS_TOKEN_MAX_AGE,
     });
 
     nextResponse.cookies.set("refresh_token", refreshToken, {
       ...cookieOptions,
-      maxAge: 10 * 60 * 60 * 60 * 1000, // 10 days
+      maxAge: REFRESH_TOKEN_MAX_AGE,
     });
 
+    // Sync new cookies with client cookies
+    cookieStore.set("access_token", accessToken, {
+      ...cookieOptions,
+      maxAge: ACCESS_TOKEN_MAX_AGE,
+    });
+
+    cookieStore.set("refresh_token", refreshToken, {
+      ...cookieOptions,
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+    })
     return nextResponse;
   } catch {
     return NextResponse.json(

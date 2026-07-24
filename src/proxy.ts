@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { API_BASE_URL } from "./constants";
+import { API_BASE_URL, ACCESS_TOKEN_MAX_AGE, REFRESH_TOKEN_MAX_AGE, cookieOptions } from "./constants";
 
 interface RefreshTokenResponse {
   accessToken: string;
@@ -47,11 +47,17 @@ export async function proxy(request: NextRequest) {
       
       // Sync new cookies with client cookies
       if (newAccessToken) {
-        cookiesStore.set("access_token", newAccessToken);
+        cookiesStore.set("access_token", newAccessToken, {
+          ...cookieOptions,
+           maxAge: ACCESS_TOKEN_MAX_AGE,
+        });
       }
 
       if (newRefreshToken) {
-        cookiesStore.set("refresh_token", newRefreshToken);
+        cookiesStore.set("refresh_token", newRefreshToken, {
+          ...cookieOptions,
+          maxAge: REFRESH_TOKEN_MAX_AGE,
+        });
       }
 
       nextResponse.headers.set("cookie", request.cookies.toString());

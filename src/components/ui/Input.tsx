@@ -21,7 +21,7 @@ export function Input({ label, id, className = "", error = "", leftIcon, rightIc
         <input
           id={id}
           {...props}
-          className={`w-full h-full pl-16 pr-5 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${error && "ring ring-red-500"}`}
+          className={`w-full h-full pl-12 pr-5 py-3 rounded-lg disabled:bg-background disabled:text-secondary-txt focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${error && "ring ring-red-500"}`}
         />
         {rightIcon && (
           <div className="absolute right-3 top-1/6">{rightIcon}</div>
