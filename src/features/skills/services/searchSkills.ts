@@ -1,14 +1,11 @@
 "use client";
 
 import { ServerErrorResponse } from "@/src/types/http";
-import { API_BASE_URL } from "@/src/constants";
 import { SearchSkillsResponse } from "@/src/types/skills";
 
 export async function searchSkills(name: string) {
   try {
-    const response = await fetch(`${API_BASE_URL}/skills/search?name=${name}`, {
-      credentials: "include",
-    });
+    const response = await fetch(`/api/skills/search?name=${name}`);
 
     const parsedResponse = await response.json();
 
