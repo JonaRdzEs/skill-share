@@ -1,16 +1,11 @@
 "use client";
 
 import { ServerErrorResponse } from "@/src/types/http";
-import { API_BASE_URL } from "@/src/constants";
 
 export async function deleteUserSkills(userSkillIds: number[]) {
   try {
-    const response = await fetch(`${API_BASE_URL}/users/me/skills`, {
+    const response = await fetch(`/api/users/me/skills`, {
       method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ userSkillIds }),
     });
 
@@ -20,7 +15,7 @@ export async function deleteUserSkills(userSkillIds: number[]) {
       const { message } = parsedResponse as ServerErrorResponse;
       throw new Error(message);
     }
-    
+
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Something went wrong";
     return { error: msg };
