@@ -2,7 +2,6 @@
 
 import { ServerErrorResponse } from "@/src/types/http";
 import { UpdatedUserResponse } from "@/src/types/users";
-import { API_BASE_URL } from "@/src/constants";
 
 interface UserInfoBody {
   username: string;
@@ -13,13 +12,9 @@ interface UserInfoBody {
 
 export async function updateUserInfo(body: UserInfoBody) {
   try {
-    const response = await fetch(`${API_BASE_URL}/users/me`, {
+    const response = await fetch(`/api/users/me`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(body),
-      credentials: "include",
     });
 
     const parsedResponse = await response.json();
