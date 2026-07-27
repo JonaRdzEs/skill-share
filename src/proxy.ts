@@ -44,23 +44,27 @@ export async function proxy(request: NextRequest) {
       const nextResponse = NextResponse.next();
       const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
         (await backendResponse.json()) as RefreshTokenResponse;
-      
+
       // Sync new cookies with client cookies
-      if (newAccessToken) {
-        cookiesStore.set("access_token", newAccessToken, {
-          ...cookieOptions,
-           maxAge: ACCESS_TOKEN_MAX_AGE,
-        });
-      }
+      cookiesStore.set("access_token", newAccessToken, {
+        ...cookieOptions,
+        maxAge: ACCESS_TOKEN_MAX_AGE,
+      });
 
-      if (newRefreshToken) {
-        cookiesStore.set("refresh_token", newRefreshToken, {
-          ...cookieOptions,
-          maxAge: REFRESH_TOKEN_MAX_AGE,
-        });
-      }
+      cookiesStore.set("refresh_token", newRefreshToken, {
+        ...cookieOptions,
+        maxAge: REFRESH_TOKEN_MAX_AGE,
+      });
 
-      nextResponse.headers.set("cookie", request.cookies.toString());
+      nextResponse.cookies.set("access_token", newAccessToken, {
+        ...cookieOptions,
+        maxAge: ACCESS_TOKEN_MAX_AGE,
+      });
+
+      nextResponse.cookies.set("refresh_token", newRefreshToken, {
+        ...cookieOptions,
+        maxAge: REFRESH_TOKEN_MAX_AGE,
+      });
 
       return nextResponse;
     } catch {
