@@ -1,17 +1,12 @@
 "use client";
 
 import { ServerErrorResponse } from "@/src/types/http";
-import { API_BASE_URL } from "@/src/constants";
 import { CreateSkillsResponse } from "@/src/types/skills";
 
 export async function createSkills(skillsToAdd: string[]) {
   try {
-    const response = await fetch(`${API_BASE_URL}/skills`, {
+    const response = await fetch(`/api/skills`, {
       method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ skills: skillsToAdd }),
     });
 

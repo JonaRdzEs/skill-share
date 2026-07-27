@@ -40,6 +40,7 @@ export function HeroSection() {
       <div className="hidden max-w-190 md:relative md:block w-full mx-auto">
         <div className="absolute inset-0 bg-linear-to-br from-blue-300 to-blue-500 rounded-2xl transform rotate-3 ml-auto mr-0 max-w-70 lg:max-w-120 xl:max-w-150" />
         <Image
+          loading="eager"
           src="/hero-section.jpg"
           width={350}
           height={360}
