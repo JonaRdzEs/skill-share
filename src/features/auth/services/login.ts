@@ -1,7 +1,7 @@
 "use client";
 
-import { ServerErrorResponse } from "@/src/types/http";
 import { LoginResponse } from "@/src/types/auth";
+import { clientApiFetch } from "@/src/lib/api-client";
 
 interface LoginBody {
   email: string;
@@ -9,22 +9,10 @@ interface LoginBody {
 }
 
 export async function login(body: LoginBody) {
-  try {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
-    const parsedResponse = await response.json();
-
-    if (!response.ok) {
-      const { message } = parsedResponse as ServerErrorResponse;
-      throw new Error(message);
-    }
-    const { user } = parsedResponse as LoginResponse;
-    return { user };
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : "Something went wrong";
-    return { error: msg };
-  }
+  return clientApiFetch<LoginResponse>({
+    path: "/auth/login",
+    method: "post",
+    body: JSON.stringify(body),
+    useProxy: true,
+  });
 }

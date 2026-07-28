@@ -19,20 +19,20 @@ export function AddSkills({ onAddSkill = () => {} }: Props) {
     if (inputValue.trim().length === 0) return;
 
     const resp = await searchSkills(inputValue);
-    setFilteredSkills(resp.skills ?? []);
+    setFilteredSkills(resp.isOk ? resp.data.skills : []);
   };
 
   const handleSubmit = async (value: string) => {
     if (value.trim().length === 0) return;
 
     const resp = await searchSkills(value);
-    // typed skill does not exist
-    if (!resp.skills?.[0]) {
+
+    if (resp.isOk && resp.data.skills.length === 0) {
       const skillResp = await createSkills([value]);
-      if (skillResp.error) return;
-      onAddSkill(skillResp.skills![0]);
-    } else {
-      onAddSkill(resp.skills[0]);
+      if (!skillResp.isOk) return;
+      onAddSkill(skillResp.data.skills[0]);
+    } else if(resp.isOk) {
+      onAddSkill(resp.data.skills[0]);
     }
   };
 

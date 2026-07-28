@@ -1,12 +1,18 @@
+"use client";
+
 import type { SignUpData } from "@/src/types/auth";
 import type { CreatedUserResponse } from "@/src/types/auth";
-import { post } from "@/src/helpers/http";
+import { clientApiFetch } from "@/src/lib/api-client";
 
 export async function signup(body: SignUpData) {
-  const response = await  post<CreatedUserResponse>({ path: "/auth/sign-up", body });
-  const { isOk } = response;
-  
-  if(isOk) return { user: response.data.user };
-
-  return { error: response.error }
+  return clientApiFetch<CreatedUserResponse>({
+    path: "/auth/sign-up",
+    method: "post",
+    body: JSON.stringify(body),
+    options: {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }
+  });
 }

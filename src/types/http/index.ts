@@ -1,9 +1,13 @@
 export interface HttpFetchOptions {
   path: string;
-  token?: string;
+  queryParams?: Record<string, string | number | boolean>;
   method: "get" | "post" | "put" | "delete";
-  body?: BodyInit | object;
-  options?: Omit<RequestInit, "method" | "body" | "headers" | "credentials">;
+  body?: BodyInit;
+  options?: Omit<RequestInit, "method" | "body">;
+}
+
+export interface ClientHttpFetchOptions extends HttpFetchOptions {
+  useProxy?: boolean; // whether to use route handlers or not
 }
 
 export interface ServerErrorResponse {
