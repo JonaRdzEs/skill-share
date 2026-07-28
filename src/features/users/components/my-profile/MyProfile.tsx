@@ -11,10 +11,10 @@ export async function MyProfile() {
     getSkillsByUser("me"),
   ]);
 
-  if (getUserResp.error) redirect(PATHS.HOME());
+  if (!getUserResp.isOk) redirect(PATHS.HOME());
 
-  const { name, email, photoUrl, bio, location, role } = getUserResp.user!;
-  const skills = getUserSkillsResp.user?.skills ?? [];
+  const { name, email, photoUrl, bio, location, role } = getUserResp.data.user;
+  const skills = getUserSkillsResp.isOk ? getUserSkillsResp.data.user.skills : [];
 
   return (
     <div className="pt-10">

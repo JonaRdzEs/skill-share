@@ -3,6 +3,7 @@ import { SearchTeacherInput } from "@/src/features/users/components/teachers/Sea
 
 interface PageSearchParams {
   name?: string;
+  page?: string;
 }
 
 interface Props {
@@ -12,13 +13,15 @@ interface Props {
 export default async function TeachersPage(props: Props) {
   const searchParams = await props.searchParams;
   const query = searchParams?.name|| "";
+  const pageParam = parseInt(searchParams?.page ?? "");
+  const page = isNaN(pageParam) ? 1 : pageParam;
 
   return (
     <>
       <h1 className="text-primary-txt font-bold text-3xl">Find a Teacher</h1>
       <p className="text-secondary-txt mt-3">Connect with skilled mentors and learn something new today.</p>
       <SearchTeacherInput />
-      <TeacherList query={query} />
+      <TeacherList query={query} page={page} />
     </>
   );
 }

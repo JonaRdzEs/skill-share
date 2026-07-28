@@ -10,11 +10,11 @@ interface Props {
 
 export default async function HomeLayout({ children }: Readonly<Props>) {
   const getUserResponse = await getLoggedUser();
-  if (getUserResponse.error) {
+  if (!getUserResponse.isOk) {
     redirect(PATHS.SIGN_IN());
   }
 
-  const user = getUserResponse.user!;
+  const { user } = getUserResponse.data;
 
   const links = [
     {

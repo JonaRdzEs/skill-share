@@ -12,11 +12,11 @@ interface Props {
 export async function TeacherProfile({ id }: Props) {
   const resp = await getTeacherById(id);
 
-  if (resp.error) {
+  if (!resp.isOk) {
     return <NoTeacherFound />;
   }
 
-  const { name, email, photoUrl, location, bio, skills, targetReviews } = resp.teacher!;
+  const { name, email, photoUrl, location, bio, skills, targetReviews } = resp.data.teacher;
 
   return (
     <div>

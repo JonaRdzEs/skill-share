@@ -10,6 +10,10 @@ export interface ClientHttpFetchOptions extends HttpFetchOptions {
   useProxy?: boolean; // whether to use route handlers or not
 }
 
+export interface ServerHttpFetchOptions extends HttpFetchOptions {
+  authenticated?: boolean;
+}
+
 export interface ServerErrorResponse {
   code: string;
   message: string;
