@@ -17,7 +17,7 @@ export function NoTeacherFound() {
       <Link
         variant="unstyled"
         className="mt-10 flex justify-center px-5 py-3 rounded-lg w-full max-w-3xs bg-primary text-white  hover:bg-blue-600"
-        href={PATHS.SEARCH_TEACHERS()}
+        href={PATHS.TEACHER_LIST()}
       >
         Go back to teacher list
       </Link>

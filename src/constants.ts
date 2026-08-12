@@ -9,7 +9,9 @@ const PATHS = {
   ROOT: () => "/",
   HOME: () => "/dashboard/home",
   MY_PROFILE: () => "/dashboard/profile/me",
-  SEARCH_TEACHERS: () => "/dashboard/teachers", 
+  TEACHER_LIST: () => "/dashboard/teachers",
+  TEACHER_PROFILE: (id: string) => `/dashboard/teachers/${id}`,
+  BOOK_SESSION: (teacherId: string) => `/dashboard/teachers/${teacherId}/book-session`,
   SIGN_IN: () => "/signin",
   SIGN_UP: () => "/signup",
 };

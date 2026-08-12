@@ -30,7 +30,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
     {
       icon: <BoardTeacher width={20} height={20} />,
       title: "Teachers",
-      path: PATHS.SEARCH_TEACHERS(),
+      path: PATHS.TEACHER_LIST(),
     }
   ];
 
