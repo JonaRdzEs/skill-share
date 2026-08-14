@@ -3,6 +3,7 @@ export * from "./AcademicCapOff";
 export * from "./Award";
 export * from "./BoardTeacher";
 export * from "./Book";
+export * from "./CalendarClock";
 export * from "./CalendarPlus";
 export * from "./Certificate";
 export * from "./Checkbox";

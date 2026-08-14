@@ -1,5 +1,5 @@
 import { Sidebar, TopBar } from "@/src/components/ui";
-import { BoardTeacher, Home, User } from "@/src/components/ui/icons";
+import { BoardTeacher, CalendarClock, Home, User } from "@/src/components/ui/icons";
 import { PATHS } from "@/src/constants";
 import { getLoggedUser } from "@/src/features/users/services/getLoggedUser";
 import { redirect } from "next/navigation";
@@ -26,6 +26,11 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
       icon: <User variant="outlined" width={20} height={20} />,
       title: "My Profile",
       path: PATHS.MY_PROFILE(),
+    },
+    {
+      icon: <CalendarClock width={20} height={20} />,
+      title: "My Sessions",
+      path: PATHS.MY_SESSIONS(),
     },
     {
       icon: <BoardTeacher width={20} height={20} />,
