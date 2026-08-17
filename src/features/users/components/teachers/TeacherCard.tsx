@@ -1,4 +1,5 @@
 import { Avatar, Link } from "@/src/components/ui";
+import { PATHS } from "@/src/constants";
 import { SkillBadge } from "@/src/features/skills/components/SkillBadge";
 
 interface Props {
@@ -15,7 +16,7 @@ export function TeacherCard({ id, name, photoUrl, bio, skills }: Props) {
   return (
     <Link
       variant="unstyled"
-      href={`/dashboard/teachers/${id}`}
+      href={PATHS.TEACHER_PROFILE(id)}
       className="flex gap-3 min-h-32 h-full shadow-sm rounded-md px-5 py-3 hover:bg-background"
     >
       <Avatar src={photoUrl} size="md" />

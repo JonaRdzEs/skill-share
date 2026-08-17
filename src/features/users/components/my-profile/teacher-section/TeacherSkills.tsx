@@ -24,12 +24,12 @@ export function TeacherSkills({ skills }: Props) {
 
     const resp = await createUserSkills([skill.id]);
 
-    if (resp.error) {
+    if (!resp.isOk) {
       console.error(resp.error);
       return;
     }
 
-    const { userSkillId, ...rest } = resp.skills![0];
+    const { userSkillId, ...rest } = resp.data.skills[0];
     setUserSkills((prevSkills) => [
       ...prevSkills,
       {
@@ -42,7 +42,7 @@ export function TeacherSkills({ skills }: Props) {
 
   const handleDeleteSkill = async (userSkillId: number) => {
     const resp = await deleteUserSkills([userSkillId]);
-    if (resp?.error) return;
+    if (!resp.isOk) return;
     const updatedSkills = userSkills.filter((userSkill) => userSkill.id !== userSkillId);
     setUserSkills(updatedSkills);
   };

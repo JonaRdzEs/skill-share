@@ -55,7 +55,7 @@ export function Pagination({ totalPages }: Props) {
           <Link
             variant="unstyled"
             href={createPageUrl(currentPage - 1)}
-            tabIndex={-1}
+            tabIndex={isFirstPage() ? -1 : 0}
             aria-disabled={isFirstPage()}
             onClick={(e) => {
               if (isFirstPage()) e.preventDefault();
@@ -89,6 +89,7 @@ export function Pagination({ totalPages }: Props) {
           <Link
             variant="unstyled"
             href={createPageUrl(currentPage + 1)}
+            tabIndex={isLastPage() ? -1 : 0}
             onClick={(e) => {
               if (isLastPage()) e.preventDefault();
             }}

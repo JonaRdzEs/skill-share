@@ -50,16 +50,17 @@ export function SignUpForm() {
       return;
     }
     setLoading(true);
-    const { error: signUpError } = await signup(data);
+    const signupResp = await signup(data);
     setLoading(false);
-    
-    if(signUpError) {
-      setRequestError(signUpError)
+
+    if (!signupResp.isOk) {
+      setRequestError(signupResp.error);
       return;
     }
 
-    login({ email, password}).then(({ user }) =>  user?.id && router.push(PATHS.HOME()));
-
+    login({ email, password }).then(
+      (resp) => resp.isOk && router.push(PATHS.HOME())
+    );
   };
 
   return (

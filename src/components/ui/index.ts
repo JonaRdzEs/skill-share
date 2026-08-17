@@ -5,6 +5,8 @@ export * from "./Card";
 export * from "./HomeLink";
 export * from "./Input";
 export * from "./Link";
+export * from "./page/PageTitle";
+export * from "./page/PageDescription";
 export * from "./Pagination";
 export * from "./Sidebar/Sidebar";
 export * from "./Switch";

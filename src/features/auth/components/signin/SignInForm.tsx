@@ -25,11 +25,11 @@ export function SignInForm() {
     if (!email || !password) return;
 
     setLoading(true);
-    const { error: loginError } = await login({ email, password });
+    const loginResp = await login({ email, password });
     setLoading(false);
 
-    if (loginError) {
-      setError(loginError);
+    if (!loginResp.isOk) {
+      setError(loginResp.error);
       return;
     }
 

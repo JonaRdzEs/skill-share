@@ -51,7 +51,7 @@ export function EditUserForm({
       role: isTeacher ? "teacher" : "student",
     });
     setLoading(false);
-    if (resp.error) {
+    if (!resp.isOk) {
       console.error(resp.error);
       return;
     }
