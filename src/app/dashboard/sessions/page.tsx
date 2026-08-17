@@ -1,3 +1,4 @@
+import { PageTitle, PageDescription } from "@/src/components/ui";
 import { SessionsList } from "@/src/features/sessions/components/SessionList";
 
 interface Props {
@@ -12,12 +13,12 @@ export default async function SessionsPage(props: Props) {
 
   return (
     <>
-      <h1 className="text-primary-txt font-bold text-3xl">My Sessions</h1>
-      <p className="text-secondary-txt mt-3">
+      <PageTitle>My Sessions</PageTitle>
+      <PageDescription>
         Keep track of your upcoming and past sessions all in one place. View
         your scheduled sessions, check their status, review the details, and
         stay organized so you never miss an opportunity to learn.
-      </p>
+      </PageDescription>
       <SessionsList page={page} />
     </>
   );

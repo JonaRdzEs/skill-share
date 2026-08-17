@@ -1,4 +1,4 @@
-import { Avatar } from "@/src/components/ui";
+import { Avatar, PageTitle, PageDescription } from "@/src/components/ui";
 import { MapPin } from "@/src/components/ui/icons";
 import { PATHS } from "@/src/constants";
 import { ScheduleSessionForm } from "@/src/features/sessions/components/ScheduleSessionForm";
@@ -19,12 +19,12 @@ export default async function BookSessionPage({ params }: Props) {
 
   return (
     <>
-      <h1 className="text-primary-txt font-bold text-3xl">Book a session</h1>
-      <p className="text-secondary-txt mt-3">
+      <PageTitle>Book a session</PageTitle>
+      <PageDescription>
         Choose a time that works for you and schedule a personalized session
         with this teacher. Use this opportunity to ask questions, explore a
         specific topic, or get guidance tailored to your learning goals.
-      </p>
+      </PageDescription>
       <div className="shadow-sm p-5 rounded-sm flex justify-start items-center gap-4 my-8 max-w-3xl mx-auto">
         <Avatar src={photoUrl} size="md" />
         <div className="flex justify-start items-start flex-col gap-1">

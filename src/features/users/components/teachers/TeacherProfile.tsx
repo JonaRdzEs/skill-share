@@ -21,7 +21,7 @@ export async function TeacherProfile({ id }: Props) {
     resp.data.teacher;
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mt-10 mx-auto">
       <TeacherInfoSection className="my-5 relative">
         <div className="flex justify-center items-center flex-col gap-4">
           <Avatar src={photoUrl ?? ""} size="xl" />
