@@ -24,12 +24,12 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
     },
     {
       icon: <User variant="outlined" width={20} height={20} />,
-      title: "My Profile",
+      title: "Profile",
       path: PATHS.MY_PROFILE(),
     },
     {
       icon: <CalendarClock width={20} height={20} />,
-      title: "My Sessions",
+      title: "Sessions",
       path: PATHS.MY_SESSIONS(),
     },
     {
@@ -44,7 +44,7 @@ export default async function HomeLayout({ children }: Readonly<Props>) {
       <TopBar className="fixed right-0 left-0 top-0 z-10" user={user} />
       <main className="flex min-h-screen pt-14">
         <Sidebar links={links} />
-        <section className="grow py-6 px-3 sm:px-10 bg-white">{children}</section>
+        <section className="grow pt-6 pb-18 px-3 sm:py-6 sm:px-10 bg-white">{children}</section>
       </main>
     </>
   );
